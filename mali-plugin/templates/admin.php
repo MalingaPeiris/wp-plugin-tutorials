@@ -1,0 +1,1 @@
+<h1>Mali Plugin</h1>
