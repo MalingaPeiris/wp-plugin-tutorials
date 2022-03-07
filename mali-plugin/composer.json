@@ -1,0 +1,19 @@
+{
+  "name": "malinga/mali-plugin",
+  "description": "first plugin",
+  "type": "project",
+  "license": "GPL",
+  "authors": [
+    {
+      "name": "MalingaPeiris",
+      "email": "63008840+MalingaPeiris@users.noreply.github.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Inc\\": "./inc"
+    }
+  }
+}

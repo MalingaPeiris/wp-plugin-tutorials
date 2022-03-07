@@ -15,6 +15,14 @@
 
 defined('ABSPATH') or die('No Access!');
 
+if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
+    require_once(dirname(__FILE__) . '/vendor/autoload.php');
+}
+
+use Inc\Activate;
+use Inc\Deactivate;
+use Inc\Admin\AdminPages;
+
 class MaliPlugin
 {
 
@@ -50,15 +58,15 @@ class MaliPlugin
     function activate()
     {
         //generate a CPT
-        $this->custom_post_type();
+        //$this->custom_post_type();
         //flush rewrite rules
-        flush_rewrite_rules();
+        Activate::activate();
     }
 
     function deactivate()
     {
         //flush rewrite rules
-        flush_rewrite_rules();
+        //flush_rewrite_rules();
     }
 
     function unistall()
@@ -83,9 +91,9 @@ if (class_exists('MaliPlugin')) {
     $maliPlugin->register();
 }
 //activation
-require_once plugin_dir_path(__FILE__) . 'inc/mali-plugin-activate.php';
-register_activation_hook(__FILE__, array('MaliPluginActivate', 'activate'));
+//require_once plugin_dir_path(__FILE__) . 'inc/mali-plugin-activate.php';
+//register_activation_hook(__FILE__, array('MaliPluginActivate', 'activate'));
 
 //deactivate
-require_once plugin_dir_path(__FILE__) . 'inc/mali-plugin-deactivate.php';
-register_deactivation_hook(__FILE__, array('MaliPluginDeactivate', 'deactivate'));
+//require_once plugin_dir_path(__FILE__) . 'inc/mali-plugin-deactivate.php';
+//register_deactivation_hook(__FILE__, array('Deactivate', 'deactivate'));
