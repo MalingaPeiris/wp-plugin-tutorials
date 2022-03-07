@@ -4,7 +4,7 @@
 @package MaliPlugin 
  */
 
-namespace Inc;
+namespace Inc\Base;
 
 class Activate
 {
