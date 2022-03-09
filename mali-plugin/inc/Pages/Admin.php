@@ -2,35 +2,50 @@
 
 namespace Inc\Pages;
 
-use \Inc\Base\BaseController;
 use \Inc\Api\SettingsApi;
+use \Inc\Base\BaseController;
+use \Inc\Api\Callbacks\AdminCallbacks;
 
 class Admin extends BaseController
 {
     public $settings;
 
+    public $callbacks;
+
     public $pages = array();
 
     public $subpages = array();
 
-    function __construct()
+
+    public function register()
     {
         $this->settings = new SettingsApi();
 
+        $this->callbacks = new AdminCallbacks();
 
+        $this->setPages();
+
+        $this->setSubpages();
+
+        $this->settings->addPages($this->pages)->withSubPage('Dashboard')->addSubPages($this->subpages)->register();
+    }
+
+    public function setPages()
+    {
         $this->pages = array(array(
             'page_title' => 'Mali Plugin',
             'menu_title' => 'Mali',
             'capability' => 'manage_options',
             'menu_slug' => 'mali_plugin',
             'callback' =>
-            function () {
-                echo '<h1>Mali Plugins</h1>';
-            },
+            array($this->callbacks, 'adminDashboard'),
             'icon_url' => 'dashicons-store',
             'position' => 110
         ));
+    }
 
+    public function setSubpages()
+    {
         $this->subpages = array(
             array(
                 'parent_slug' => 'mali_plugin',
@@ -54,12 +69,5 @@ class Admin extends BaseController
             )
 
         );
-    }
-
-    public function register()
-    {
-        //add_action('admin_menu', array($this, 'add_admin_pages'));
-
-        $this->settings->addPages($this->pages)->withSubPage('Dashboard')->addSubPages($this->subpages)->register();
     }
 }

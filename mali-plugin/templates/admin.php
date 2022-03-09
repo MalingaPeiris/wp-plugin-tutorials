@@ -1,1 +1,1 @@
-<h1>Mali Plugin</h1>
+<h1>Mali Plugin Required</h1>
