@@ -27,6 +27,12 @@ class Admin extends BaseController
 
         $this->setSubpages();
 
+        $this->setSettings();
+
+        $this->setSections();
+
+        $this->setFields();
+
         $this->settings->addPages($this->pages)->withSubPage('Dashboard')->addSubPages($this->subpages)->register();
     }
 
@@ -69,5 +75,50 @@ class Admin extends BaseController
             )
 
         );
+    }
+    public function setSettings()
+    {
+        $args = array(
+            array(
+                'option_group' => 'mali_options_group',
+                'option_name' => 'text-example',
+                'callback' => array($this->callbacks, 'maliOptionsGruop')
+            )
+        );
+
+        $this->settings->setSettings($args);
+    }
+
+    public function setSections()
+    {
+        $args = array(
+            array(
+                'id' => 'mali_admin_index',
+                'title' => 'Settings',
+                'callback' => array($this->callbacks, 'maliAdminSection'),
+                'page' => 'mali_plugin'
+            )
+        );
+
+        $this->settings->setSections($args);
+    }
+
+    public function setFields()
+    {
+        $args = array(
+            array(
+                'id' => 'text-example',
+                'title' => 'Text Example',
+                'callback' => array($this->callbacks, 'maliTextExample'),
+                'page' => 'mali_plugin',
+                'section' => 'mali_admin-index',
+                'args' => array(
+                    'label_for' => 'text_example',
+                    'class' => 'example_class'
+                )
+            )
+        );
+
+        $this->settings->setFields($args);
     }
 }
