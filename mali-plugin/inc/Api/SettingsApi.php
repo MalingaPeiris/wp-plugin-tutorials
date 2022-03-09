@@ -3,8 +3,9 @@
 namespace inc\Api;
 
 class SettingsApi{
-    public $admin_page = array();
-    public $admin_subpage = array();
+    public $admin_pages = array();
+
+    public $admin_subpages = array();
 
     public function register() {
         if(!empty($this->admin_pages)){

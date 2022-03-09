@@ -33,7 +33,7 @@ class Admin extends BaseController
 
         $this->subpages = array(
             array(
-                'parent_slug' => 'Mali_Plugin',
+                'parent_slug' => 'mali_plugin',
                 'page_title' => 'Custom Post Types',
                 'menu_title' => 'CPT',
                 'capability' => 'manage_options',
@@ -62,13 +62,4 @@ class Admin extends BaseController
 
         $this->settings->addPages($this->pages)->withSubPage('Dashboard')->addSubPages($this->subpages)->register();
     }
-
-    /**  public function add_admin_pages()
-    {
-        add_menu_page('Mali Plugin', 'Mali', 'manage_options', 'mali_plugin', array($this, 'admin_index'), 'dashicons-store', 100);
-    }
-    public function admin_index()
-    {
-        require_once plugin_dir_path(__FILE__) . '../../templates/admin.php';
-    }*/
 }
