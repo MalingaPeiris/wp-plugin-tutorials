@@ -81,7 +81,7 @@ class Admin extends BaseController
         $args = array(
             array(
                 'option_group' => 'mali_options_group',
-                'option_name' => 'text-example',
+                'option_name' => 'text_example',
                 'callback' => array($this->callbacks, 'maliOptionsGruop')
             )
         );
@@ -107,11 +107,11 @@ class Admin extends BaseController
     {
         $args = array(
             array(
-                'id' => 'text-example',
+                'id' => 'text_example',
                 'title' => 'Text Example',
                 'callback' => array($this->callbacks, 'maliTextExample'),
                 'page' => 'mali_plugin',
-                'section' => 'mali_admin-index',
+                'section' => 'mali_admin_index',
                 'args' => array(
                     'label_for' => 'text_example',
                     'class' => 'example_class'
