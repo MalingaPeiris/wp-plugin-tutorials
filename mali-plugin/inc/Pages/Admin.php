@@ -5,12 +5,15 @@ namespace Inc\Pages;
 use \Inc\Api\SettingsApi;
 use \Inc\Base\BaseController;
 use \Inc\Api\Callbacks\AdminCallbacks;
+use \Inc\Api\Callbacks\ManagerCallbacks;
 
 class Admin extends BaseController
 {
     public $settings;
 
     public $callbacks;
+
+    public $callbacks_mngr;
 
     public $pages = array();
 
@@ -22,6 +25,8 @@ class Admin extends BaseController
         $this->settings = new SettingsApi();
 
         $this->callbacks = new AdminCallbacks();
+
+        $this->callbacks_mngr = new ManagerCallbacks();
 
         $this->setPages();
 
@@ -80,9 +85,49 @@ class Admin extends BaseController
     {
         $args = array(
             array(
-                'option_group' => 'mali_options_group',
-                'option_name' => 'text_example',
-                'callback' => array($this->callbacks, 'maliOptionsGruop')
+                'option_group' => 'mali_plugin_settings',
+                'option_name' => 'cpt_manager',
+                'callback' => array($this->callbacks_mngr, 'checkboxSanitize')
+            ),
+            array(
+                'option_group' => 'mali_plugin_settings',
+                'option_name' => 'taxonomy_namager',
+                'callback' => array($this->callbacks_mngr, 'checkboxSanitize')
+            ),
+            array(
+                'option_group' => 'mali_plugin_settings',
+                'option_name' => 'media_widget',
+                'callback' => array($this->callbacks_mngr, 'checkboxSanitize')
+            ),
+            array(
+                'option_group' => 'mali_plugin_settings',
+                'option_name' => 'gallery_manager',
+                'callback' => array($this->callbacks_mngr, 'checkboxSanitize')
+            ),
+            array(
+                'option_group' => 'mali_plugin_settings',
+                'option_name' => 'testimonial_manager',
+                'callback' => array($this->callbacks_mngr, 'checkboxSanitize')
+            ),
+            array(
+                'option_group' => 'mali_plugin_settings',
+                'option_name' => 'template_namager',
+                'callback' => array($this->callbacks_mngr, 'checkboxSanitize')
+            ),
+            array(
+                'option_group' => 'mali_plugin_settings',
+                'option_name' => 'login_namager',
+                'callback' => array($this->callbacks_mngr, 'checkboxSanitize')
+            ),
+            array(
+                'option_group' => 'mali_plugin_settings',
+                'option_name' => 'membership_namager',
+                'callback' => array($this->callbacks_mngr, 'checkboxSanitize')
+            ),
+            array(
+                'option_group' => 'mali_plugin_settings',
+                'option_name' => 'chat_namager',
+                'callback' => array($this->callbacks_mngr, 'checkboxSanitize')
             )
         );
 
@@ -94,8 +139,8 @@ class Admin extends BaseController
         $args = array(
             array(
                 'id' => 'mali_admin_index',
-                'title' => 'Settings',
-                'callback' => array($this->callbacks, 'maliAdminSection'),
+                'title' => 'Settings Manager',
+                'callback' => array($this->callbacks_mngr, 'adminSectionManager'),
                 'page' => 'mali_plugin'
             )
         );
@@ -107,14 +152,36 @@ class Admin extends BaseController
     {
         $args = array(
             array(
-                'id' => 'text_example',
-                'title' => 'Text Example',
-                'callback' => array($this->callbacks, 'maliTextExample'),
+                'id' => 'cpt_manager',
+                'title' => 'Activate CPT Manager',
+                'callback' => array($this->callbacks_mngr, 'checkboxField'),
                 'page' => 'mali_plugin',
                 'section' => 'mali_admin_index',
                 'args' => array(
                     'label_for' => 'text_example',
-                    'class' => 'example_class'
+                    'class' => 'ui-toggle'
+                )
+            ),
+            array(
+                'id' => 'taxonomy_manager',
+                'title' => 'Activate Taxonomy Manager',
+                'callback' => array($this->callbacks_mngr, 'checkboxField'),
+                'page' => 'mali_plugin',
+                'section' => 'mali_admin_index',
+                'args' => array(
+                    'label_for' => 'text_example',
+                    'class' => 'ui-toggle'
+                )
+            ),
+            array(
+                'id' => 'media_widget',
+                'title' => 'Activate Media Widget',
+                'callback' => array($this->callbacks_mngr, 'checkboxField'),
+                'page' => 'mali_plugin',
+                'section' => 'mali_admin_index',
+                'args' => array(
+                    'label_for' => 'text_example',
+                    'class' => 'ui-toggle'
                 )
             )
         );
